@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import datetime as dt
+from pathlib import Path
 
+from homeassistant.util.yaml import load_yaml
 import pytest
 import voluptuous as vol
 import yaml
@@ -286,3 +288,29 @@ def test_example_files_are_valid() -> None:
     examples = Path(__file__).parent.parent / "examples"
     validate_school(load_yaml(examples / "simple-school.yaml"))
     CONFIG_SCHEMA(load_yaml(examples / "configuration.yaml"))
+
+
+SAMPLE_CALENDARS = sorted(
+    (Path(__file__).parent.parent / "calendars").rglob("*.yaml"),
+)
+
+
+@pytest.mark.parametrize(
+    "file",
+    SAMPLE_CALENDARS,
+    ids=lambda path: path.relative_to(path.parents[1]).as_posix(),
+)
+def test_sample_calendars_are_valid(file: Path) -> None:
+    """Every sample calendar loads and has a school year with school days."""
+    calendar = SchoolCalendar.from_config(validate_school(load_yaml(file)))
+    assert calendar.periods, "sample calendars should set school_year"
+    for period in calendar.periods:
+        assert calendar.count_school_days(period.range.first, period.range.last) > 0
+
+
+def test_lwsd_2026_27_has_180_days() -> None:
+    """Washington requires 180 school days; the LWSD samples match that."""
+    for level in ("elementary", "middle-school"):
+        file = Path(__file__).parent.parent / f"calendars/lwsd/2026-27-{level}.yaml"
+        calendar = SchoolCalendar.from_config(validate_school(load_yaml(file)))
+        assert calendar.count_school_days(d("2026-08-31"), d("2027-06-16")) == 180

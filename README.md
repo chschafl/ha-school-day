@@ -210,6 +210,14 @@ python3 scripts/check_calendar.py school_day/kirkland_middle_school.yaml
 It prints school days per month and warns about likely mistakes, such as a
 holiday that falls on a Saturday.
 
+## Sample calendars
+
+The [`calendars/`](calendars/) folder has ready-made calendars you can copy,
+starting with the Lake Washington School District 2026-27 calendars for
+[elementary](calendars/lwsd/2026-27-elementary.yaml) and
+[middle school](calendars/lwsd/2026-27-middle-school.yaml). Contributions for
+other districts are welcome.
+
 ## Automation examples
 
 **Bus reminder 40 minutes before school starts.** No condition is needed: on

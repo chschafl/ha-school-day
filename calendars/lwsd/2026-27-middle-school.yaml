@@ -1,0 +1,48 @@
+# Lake Washington School District - 2026-27, Middle School (grades 6-8)
+# Source: Lake Washington School District | 2026-27 Calendar FINAL (updated 8/2026)
+#   https://resources.finalsite.net/images/v1787679561/lwsdorg/eok5lsfktcue6muzply9/2026-27LWSD-one-page-calendar-English.pdf
+name: LWSD Middle School
+
+# Bell times. "regular" is mandatory; add one entry per kind of special day.
+# Times are quoted 24-hour "HH:MM".
+schedules:
+  regular:       { start: "07:50", end: "14:25" }
+  early_release: { start: "07:50", end: "12:40" }  # Wednesday early release, 105 min early
+  half_day:      { start: "07:50", end: "10:55" }  # CHECK: half-day dismissal time not on calendar
+
+# Regular school days of the week and the schedule each one uses.
+# Wednesday early release schedule begins Sept. 9 (Sept. 2 overridden to regular below).
+week:
+  mon-tue: regular
+  wed: early_release
+  thu-fri: regular
+
+# First and last day of school for students (inclusive).
+school_year:
+  from: 2026-08-31   # Mon
+  to: 2027-06-16     # Wed
+  name: "2026-27"
+
+# Weekdays inside the school year WITHOUT school for students.
+days_off:
+  - { date: 2026-09-07, name: "Labor Day" }                        # Mon
+  - { date: 2026-10-16, name: "LEAP Day" }                         # Fri
+  - { date: 2026-11-11, name: "Veterans Day" }                     # Wed
+  - { from: 2026-11-26, to: 2026-11-27, name: "Thanksgiving Vacation" }  # Thu-Fri
+  - { from: 2026-12-21, to: 2027-01-01, name: "Winter Break" }                 # Mon-Fri
+  - { date: 2027-01-18, name: "MLK Jr. Day" }                      # Mon
+  - { from: 2027-02-11, to: 2027-02-12, name: "Mid-Winter Break" } # Thu-Fri
+  - { date: 2027-02-15, name: "Presidents Day" }                   # Mon
+  - { date: 2027-03-12, name: "LEAP Day" }                         # Fri
+  - { from: 2027-04-12, to: 2027-04-16, name: "Spring Break" }     # Mon-Fri
+  - { date: 2027-05-28, name: "LEAP Day" }                         # Fri
+  - { date: 2027-05-31, name: "Memorial Day" }                     # Mon
+  - { date: 2027-06-01, name: "School Closure Make-up Day (if needed)" }       # Tue
+
+# School days with different times. Refer to a schedule by name, or override
+# just "start" and/or "end".
+special_days:
+  - { date: 2026-09-02, schedule: regular, name: "Before Wednesday early release begins (Sept. 9)" }  # Wed
+  - { date: 2026-11-25, schedule: half_day, name: "Half Day" }                                         # Wed
+  - { date: 2027-06-16, schedule: half_day, name: "Half-Day - Last Day of School (K-12)" }             # Wed
+# Half-Day Elementary Conferences (Aug. 31-Sept. 2, Jan. 26, 28-29) are elementary only - not listed.

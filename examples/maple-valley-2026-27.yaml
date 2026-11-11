@@ -1,0 +1,41 @@
+# Maple Valley School District - 2026-27 district calendar (fictional example)
+#
+# A calendar fragment: only dates, no bell times. Several schools can share it
+# with `calendar: !include maple-valley-2026-27.yaml` and add their own times.
+#
+# special_days refer to schedules by name (early_release, late_start) so each
+# school defines what "early release" means for its own bell times.
+
+school_year:
+  from: 2026-09-02          # Wed - first day, grades 1-12
+  to: 2027-06-16            # Wed - last day
+  name: "2026-27"
+
+# Every Friday is early release.
+week:
+  mon-thu: regular
+  fri: early_release
+
+days_off:
+  - { date: 2026-09-07, name: Labor Day }                         # Mon
+  - { date: 2026-10-09, name: Professional development day }      # Fri
+  - { date: 2026-11-11, name: Veterans Day }                      # Wed
+  - { from: 2026-11-26, to: 2026-11-27, name: Thanksgiving break } # Thu-Fri
+  - { from: 2026-12-21, to: 2027-01-01, name: Winter break }      # Mon-Fri
+  - { date: 2027-01-18, name: Martin Luther King Jr. Day }        # Mon
+  - { date: 2027-01-29, name: Semester break (no school) }        # Fri
+  - { from: 2027-02-15, to: 2027-02-19, name: Mid-winter break }  # Mon-Fri
+  - { from: 2027-04-05, to: 2027-04-09, name: Spring break }      # Mon-Fri
+  - { date: 2027-05-31, name: Memorial Day }                      # Mon
+
+special_days:
+  # Conference week: early release every day.
+  - { from: 2026-11-16, to: 2026-11-20, schedule: early_release, name: Conference week }
+  - { date: 2026-11-25, schedule: early_release, name: Day before Thanksgiving }  # Wed
+  - { date: 2026-12-18, schedule: early_release, name: Last day before winter break }  # Fri
+  - { date: 2027-03-10, schedule: late_start, name: State testing - late start }  # Wed
+  - { date: 2027-06-16, schedule: early_release, name: Last day of school }       # Wed
+
+# Snow make-up days are only added once they are actually used, e.g.:
+# extra_days:
+#   - { date: 2027-06-17, name: Snow make-up day }

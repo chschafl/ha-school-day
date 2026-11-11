@@ -1,0 +1,51 @@
+{
+  "entity": {
+    "binary_sensor": {
+      "school_today": {
+        "default": "mdi:school-outline",
+        "state": {
+          "on": "mdi:school"
+        }
+      },
+      "school_tomorrow": {
+        "default": "mdi:calendar-blank-outline",
+        "state": {
+          "on": "mdi:calendar-check"
+        }
+      }
+    },
+    "calendar": {
+      "calendar": {
+        "default": "mdi:calendar-school"
+      }
+    },
+    "sensor": {
+      "start_time": {
+        "default": "mdi:bell-ring-outline"
+      },
+      "end_time": {
+        "default": "mdi:bell-check-outline"
+      },
+      "status": {
+        "default": "mdi:school",
+        "state": {
+          "before_school": "mdi:bus-school",
+          "in_school": "mdi:school",
+          "after_school": "mdi:home-account",
+          "no_school": "mdi:sleep"
+        }
+      },
+      "next_school_day": {
+        "default": "mdi:calendar-arrow-right"
+      },
+      "school_days_left": {
+        "default": "mdi:calendar-clock"
+      }
+    }
+  },
+  "services": {
+    "reload": {
+      "service": "mdi:reload"
+    }
+  }
+}

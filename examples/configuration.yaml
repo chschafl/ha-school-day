@@ -1,0 +1,21 @@
+# Two kids, one district: the dates live in one shared file, each school only
+# adds its own bell times. Put this in configuration.yaml (or a package) and
+# the district file next to it, then run the "School Day: Reload" action.
+
+school_day:
+  - name: Rose Hill Elementary
+    schedules:
+      regular:       { start: "08:50", end: "15:20" }
+      early_release: { start: "08:50", end: "13:20" }
+      late_start:    { start: "10:50", end: "15:20" }
+    calendar: !include maple-valley-2026-27.yaml
+
+  - name: Redmond Middle School
+    schedules:
+      regular:       { start: "07:50", end: "14:20" }
+      early_release: { start: "07:50", end: "12:20" }
+      late_start:    { start: "09:50", end: "14:20" }
+    calendar: !include maple-valley-2026-27.yaml
+    # School-specific additions are merged with the district calendar:
+    days_off:
+      - { date: 2027-06-15, name: 8th grade field trip - no school for 6th/7th }

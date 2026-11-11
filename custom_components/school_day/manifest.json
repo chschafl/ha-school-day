@@ -1,0 +1,13 @@
+{
+  "domain": "school_day",
+  "name": "School Day",
+  "codeowners": ["@chschafl"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/chschafl/ha-school-day",
+  "integration_type": "service",
+  "iot_class": "calculated",
+  "issue_tracker": "https://github.com/chschafl/ha-school-day/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}

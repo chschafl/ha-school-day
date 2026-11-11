@@ -1,0 +1,123 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Schule hinzufügen",
+        "description": "School Day liest den Kalender jeder Schule (Schuljahr, schulfreie Tage, besondere Tage und Unterrichtszeiten) aus einer YAML-Datei in deinem Konfigurationsordner. Gibt es die Datei noch nicht, wird eine kommentierte Vorlage zum Bearbeiten angelegt.\n\nTipp: Ein KI-Assistent kann das PDF des Schulkalenders in diese Datei umwandeln. Den Prompt findest du in der Dokumentation.",
+        "data": {
+          "name": "Name der Schule",
+          "file": "Kalenderdatei"
+        },
+        "data_description": {
+          "name": "Wird als Gerätename angezeigt, z. B. \"Volksschule Am Park\" oder \"Emmas Schule\".",
+          "file": "Pfad relativ zum Konfigurationsordner. Leer lassen für {folder}/<Name der Schule>.yaml."
+        }
+      }
+    },
+    "error": {
+      "invalid_file": "Die Kalenderdatei konnte nicht geladen werden: {error}",
+      "invalid_path": "Verwende eine .yaml-Datei im Konfigurationsordner, z. B. school_day/meine_schule.yaml."
+    },
+    "abort": {
+      "already_configured": "Diese Kalenderdatei wird bereits verwendet."
+    },
+    "create_entry": {
+      "starter_file": "Eine Vorlage wurde nach `{file}` im Konfigurationsordner geschrieben. Öffne sie mit dem File Editor oder Studio Code Server und trage die Termine und Unterrichtszeiten deiner Schule ein. Änderungen werden automatisch übernommen."
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "school_today": {
+        "name": "Schule heute",
+        "state_attributes": {
+          "reason": {
+            "name": "Grund",
+            "state": {
+              "regular": "Normaler Schultag",
+              "special_day": "Besonderer Tag",
+              "extra_day": "Zusätzlicher Schultag",
+              "day_off": "Schulfrei",
+              "weekend": "Wochenende",
+              "out_of_session": "Außerhalb des Schuljahres"
+            }
+          },
+          "label": { "name": "Bezeichnung" },
+          "schedule": { "name": "Stundenplan" },
+          "start_time": { "name": "Beginn" },
+          "end_time": { "name": "Ende" },
+          "date": { "name": "Datum" }
+        }
+      },
+      "school_tomorrow": {
+        "name": "Schule morgen",
+        "state_attributes": {
+          "reason": {
+            "name": "Grund",
+            "state": {
+              "regular": "Normaler Schultag",
+              "special_day": "Besonderer Tag",
+              "extra_day": "Zusätzlicher Schultag",
+              "day_off": "Schulfrei",
+              "weekend": "Wochenende",
+              "out_of_session": "Außerhalb des Schuljahres"
+            }
+          },
+          "label": { "name": "Bezeichnung" },
+          "schedule": { "name": "Stundenplan" },
+          "start_time": { "name": "Beginn" },
+          "end_time": { "name": "Ende" },
+          "date": { "name": "Datum" }
+        }
+      }
+    },
+    "sensor": {
+      "start_time": {
+        "name": "Schulbeginn"
+      },
+      "end_time": {
+        "name": "Schulende"
+      },
+      "status": {
+        "name": "Status",
+        "state": {
+          "before_school": "Vor der Schule",
+          "in_school": "In der Schule",
+          "after_school": "Nach der Schule",
+          "no_school": "Schulfrei"
+        }
+      },
+      "next_school_day": {
+        "name": "Nächster Schultag"
+      },
+      "school_days_left": {
+        "name": "Verbleibende Schultage",
+        "state_attributes": {
+          "total": { "name": "Schultage im Schuljahr" },
+          "school_year": { "name": "Schuljahr" },
+          "first_day": { "name": "Erster Schultag" },
+          "last_day": { "name": "Letzter Schultag" }
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "invalid_file": {
+      "message": "Die Kalenderdatei {file} konnte nicht geladen werden: {error}"
+    },
+    "not_in_yaml": {
+      "message": "Die Schule {school_id} ist nicht mehr in der configuration.yaml definiert."
+    }
+  },
+  "issues": {
+    "invalid_file": {
+      "title": "Fehler im Schulkalender von {name}",
+      "description": "Die Kalenderdatei `{file}` wurde geändert, konnte aber nicht geladen werden. Die vorherige Version bleibt aktiv.\n\nFehler: {error}\n\nKorrigiere die Datei und speichere sie erneut; sie wird automatisch übernommen."
+    }
+  },
+  "services": {
+    "reload": {
+      "name": "Neu laden",
+      "description": "Lädt alle Schulen aus der configuration.yaml und ihre Kalenderdateien neu."
+    }
+  }
+}

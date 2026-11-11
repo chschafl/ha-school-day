@@ -1,0 +1,123 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add a school",
+        "description": "School Day reads each school's calendar (school year, days off, special days and bell times) from a YAML file in your configuration folder. If the file doesn't exist yet, a commented starter file is created for you to edit.\n\nTip: an AI assistant can turn your school's calendar PDF into this file. See the prompt in the documentation.",
+        "data": {
+          "name": "School name",
+          "file": "Calendar file"
+        },
+        "data_description": {
+          "name": "Shown as the device name, e.g. \"Rose Hill Elementary\" or \"Emma's school\".",
+          "file": "Path relative to your configuration folder. Leave empty to use {folder}/<school name>.yaml."
+        }
+      }
+    },
+    "error": {
+      "invalid_file": "The calendar file could not be loaded: {error}",
+      "invalid_path": "Use a .yaml file inside your configuration folder, e.g. school_day/my_school.yaml."
+    },
+    "abort": {
+      "already_configured": "This calendar file is already in use."
+    },
+    "create_entry": {
+      "starter_file": "A starter calendar was written to `{file}` in your configuration folder. Open it in the File editor or Studio Code Server and fill in your school's dates and bell times. Changes are picked up automatically."
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "school_today": {
+        "name": "School today",
+        "state_attributes": {
+          "reason": {
+            "name": "Reason",
+            "state": {
+              "regular": "Regular school day",
+              "special_day": "Special day",
+              "extra_day": "Extra school day",
+              "day_off": "Day off",
+              "weekend": "Weekend",
+              "out_of_session": "Outside the school year"
+            }
+          },
+          "label": { "name": "Label" },
+          "schedule": { "name": "Schedule" },
+          "start_time": { "name": "Start time" },
+          "end_time": { "name": "End time" },
+          "date": { "name": "Date" }
+        }
+      },
+      "school_tomorrow": {
+        "name": "School tomorrow",
+        "state_attributes": {
+          "reason": {
+            "name": "Reason",
+            "state": {
+              "regular": "Regular school day",
+              "special_day": "Special day",
+              "extra_day": "Extra school day",
+              "day_off": "Day off",
+              "weekend": "Weekend",
+              "out_of_session": "Outside the school year"
+            }
+          },
+          "label": { "name": "Label" },
+          "schedule": { "name": "Schedule" },
+          "start_time": { "name": "Start time" },
+          "end_time": { "name": "End time" },
+          "date": { "name": "Date" }
+        }
+      }
+    },
+    "sensor": {
+      "start_time": {
+        "name": "Start time"
+      },
+      "end_time": {
+        "name": "End time"
+      },
+      "status": {
+        "name": "Status",
+        "state": {
+          "before_school": "Before school",
+          "in_school": "In school",
+          "after_school": "After school",
+          "no_school": "No school"
+        }
+      },
+      "next_school_day": {
+        "name": "Next school day"
+      },
+      "school_days_left": {
+        "name": "School days left",
+        "state_attributes": {
+          "total": { "name": "School days this year" },
+          "school_year": { "name": "School year" },
+          "first_day": { "name": "First day" },
+          "last_day": { "name": "Last day" }
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "invalid_file": {
+      "message": "Could not load the calendar file {file}: {error}"
+    },
+    "not_in_yaml": {
+      "message": "School {school_id} is no longer defined in configuration.yaml."
+    }
+  },
+  "issues": {
+    "invalid_file": {
+      "title": "School calendar for {name} has an error",
+      "description": "The calendar file `{file}` was changed but could not be loaded, so the previous version is still in use.\n\nError: {error}\n\nFix the file and save it again; it will be picked up automatically."
+    }
+  },
+  "services": {
+    "reload": {
+      "name": "Reload",
+      "description": "Reloads all schools from configuration.yaml and their calendar files."
+    }
+  }
+}

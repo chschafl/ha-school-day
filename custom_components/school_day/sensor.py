@@ -22,7 +22,7 @@ from .entity import SchoolDayEntity, day_attributes
 PARALLEL_UPDATES = 0
 
 
-def _days_left_attributes(data: SchoolDayData) -> dict[str, Any]:
+def _school_year_attributes(data: SchoolDayData) -> dict[str, Any]:
     period = data.period
     return {
         "total": data.days_total,
@@ -74,7 +74,14 @@ SENSORS = (
         translation_key="school_days_left",
         native_unit_of_measurement="days",
         value_fn=lambda data: data.days_left,
-        attributes_fn=_days_left_attributes,
+        attributes_fn=_school_year_attributes,
+    ),
+    SchoolDaySensorDescription(
+        key="school_days_completed",
+        translation_key="school_days_completed",
+        native_unit_of_measurement="days",
+        value_fn=lambda data: data.days_completed,
+        attributes_fn=_school_year_attributes,
     ),
 )
 

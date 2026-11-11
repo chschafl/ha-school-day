@@ -48,6 +48,7 @@ class SchoolDayData:
     next_school_day: DayInfo | None
     period: Period | None
     days_left: int | None
+    days_completed: int | None
     days_total: int | None
 
 
@@ -74,13 +75,16 @@ def build_snapshot(calendar: SchoolCalendar, now: dt.datetime) -> SchoolDayData:
         status = STATUS_NO_SCHOOL
 
     period = calendar.period_for(today)
-    days_left = days_total = None
+    days_left = days_completed = days_total = None
     if period is not None:
         days_total = calendar.count_school_days(period.range.first, period.range.last)
         first = max(today, period.range.first)
         days_left = calendar.count_school_days(first, period.range.last)
         if first == today and status == STATUS_AFTER_SCHOOL:
             days_left -= 1  # today is done
+        # Completed + left always adds up to the total; today counts as
+        # completed once school is out.
+        days_completed = days_total - days_left
 
     return SchoolDayData(
         now=now,
@@ -92,6 +96,7 @@ def build_snapshot(calendar: SchoolCalendar, now: dt.datetime) -> SchoolDayData:
         next_school_day=calendar.next_school_day(today),
         period=period,
         days_left=days_left,
+        days_completed=days_completed,
         days_total=days_total,
     )
 

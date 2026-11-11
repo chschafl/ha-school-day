@@ -9,7 +9,7 @@
           "file": "Calendar file"
         },
         "data_description": {
-          "name": "Shown as the device name, e.g. \"Rose Hill Elementary\" or \"Emma's school\".",
+          "name": "Shown as the device name, e.g. \"Kirkland Middle School\" or \"Emma's school\".",
           "file": "Path relative to your configuration folder. Leave empty to use {folder}/<school name>.yaml."
         }
       }
@@ -41,11 +41,21 @@
               "out_of_session": "Outside the school year"
             }
           },
-          "label": { "name": "Label" },
-          "schedule": { "name": "Schedule" },
-          "start_time": { "name": "Start time" },
-          "end_time": { "name": "End time" },
-          "date": { "name": "Date" }
+          "label": {
+            "name": "Label"
+          },
+          "schedule": {
+            "name": "Schedule"
+          },
+          "start_time": {
+            "name": "Start time"
+          },
+          "end_time": {
+            "name": "End time"
+          },
+          "date": {
+            "name": "Date"
+          }
         }
       },
       "school_tomorrow": {
@@ -62,11 +72,21 @@
               "out_of_session": "Outside the school year"
             }
           },
-          "label": { "name": "Label" },
-          "schedule": { "name": "Schedule" },
-          "start_time": { "name": "Start time" },
-          "end_time": { "name": "End time" },
-          "date": { "name": "Date" }
+          "label": {
+            "name": "Label"
+          },
+          "schedule": {
+            "name": "Schedule"
+          },
+          "start_time": {
+            "name": "Start time"
+          },
+          "end_time": {
+            "name": "End time"
+          },
+          "date": {
+            "name": "Date"
+          }
         }
       }
     },
@@ -92,10 +112,35 @@
       "school_days_left": {
         "name": "School days left",
         "state_attributes": {
-          "total": { "name": "School days this year" },
-          "school_year": { "name": "School year" },
-          "first_day": { "name": "First day" },
-          "last_day": { "name": "Last day" }
+          "total": {
+            "name": "School days this year"
+          },
+          "school_year": {
+            "name": "School year"
+          },
+          "first_day": {
+            "name": "First day"
+          },
+          "last_day": {
+            "name": "Last day"
+          }
+        }
+      },
+      "school_days_completed": {
+        "name": "School days completed",
+        "state_attributes": {
+          "total": {
+            "name": "School days this year"
+          },
+          "school_year": {
+            "name": "School year"
+          },
+          "first_day": {
+            "name": "First day"
+          },
+          "last_day": {
+            "name": "Last day"
+          }
         }
       }
     }

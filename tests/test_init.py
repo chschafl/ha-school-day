@@ -73,6 +73,10 @@ async def test_school_day_lifecycle(
     days_left = int(state(hass, "sensor.rose_hill_school_days_left"))
     total = hass.states.get("sensor.rose_hill_school_days_left").attributes["total"]
     assert 0 < days_left < total
+    # Sep 2 - Nov 9 has 49 weekdays and no days off; today is not done yet.
+    completed = int(state(hass, "sensor.rose_hill_school_days_completed"))
+    assert completed == 49
+    assert completed + days_left == total
 
     await move_to(hass, freezer, "2026-11-10 08:50:00-08:00")
     assert state(hass, "sensor.rose_hill_status") == "in_school"
@@ -82,6 +86,7 @@ async def test_school_day_lifecycle(
     assert state(hass, "sensor.rose_hill_status") == "after_school"
     assert state(hass, "calendar.rose_hill") == STATE_OFF
     assert int(state(hass, "sensor.rose_hill_school_days_left")) == days_left - 1
+    assert int(state(hass, "sensor.rose_hill_school_days_completed")) == completed + 1
 
     # Midnight: Veterans Day, no school.
     await move_to(hass, freezer, "2026-11-11 00:00:00-08:00")

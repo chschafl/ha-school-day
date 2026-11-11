@@ -40,6 +40,9 @@
       },
       "school_days_left": {
         "default": "mdi:calendar-clock"
+      },
+      "school_days_completed": {
+        "default": "mdi:progress-check"
       }
     }
   },

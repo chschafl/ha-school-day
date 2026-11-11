@@ -23,18 +23,19 @@ district's calendar PDF.
 ## Entities
 
 Every school becomes a device with these entities (shown here for a school
-named *Rose Hill Elementary*):
+named *Kirkland Middle School*):
 
 | Entity | Example state | Description |
 | --- | --- | --- |
-| `binary_sensor.rose_hill_elementary_school_today` | `on` | Is there school today? |
-| `binary_sensor.rose_hill_elementary_school_tomorrow` | `off` | Is there school tomorrow? Handy the evening before. |
-| `sensor.rose_hill_elementary_start_time` | `2026-11-10T08:50:00-08:00` | Today's start time. `unknown` on days without school. |
-| `sensor.rose_hill_elementary_end_time` | `2026-11-10T15:20:00-08:00` | Today's end time. `unknown` on days without school. |
-| `sensor.rose_hill_elementary_status` | `before_school` | `before_school`, `in_school`, `after_school` or `no_school` |
-| `sensor.rose_hill_elementary_next_school_day` | `2026-11-12` | The next school day after today. |
-| `sensor.rose_hill_elementary_school_days_left` | `142` | School days left this school year (countdown to summer). |
-| `calendar.rose_hill_elementary` | | School days with their times and days off, in the HA calendar. |
+| `binary_sensor.kirkland_middle_school_school_today` | `on` | Is there school today? |
+| `binary_sensor.kirkland_middle_school_school_tomorrow` | `off` | Is there school tomorrow? Handy the evening before. |
+| `sensor.kirkland_middle_school_start_time` | `2026-11-10T08:50:00-08:00` | Today's start time. `unknown` on days without school. |
+| `sensor.kirkland_middle_school_end_time` | `2026-11-10T15:20:00-08:00` | Today's end time. `unknown` on days without school. |
+| `sensor.kirkland_middle_school_status` | `before_school` | `before_school`, `in_school`, `after_school` or `no_school` |
+| `sensor.kirkland_middle_school_next_school_day` | `2026-11-12` | The next school day after today. |
+| `sensor.kirkland_middle_school_school_days_left` | `142` | School days left this school year (countdown to summer). |
+| `sensor.kirkland_middle_school_school_days_completed` | `36` | School days completed so far this school year. |
+| `calendar.kirkland_middle_school` | | School days with their times and days off, in the HA calendar. |
 
 The two binary sensors (and *Next school day*) have attributes describing the
 day:
@@ -47,8 +48,9 @@ day:
 | `start_time` / `end_time` | `08:50` / `12:20` | Times for that day |
 | `date` | `2026-11-25` | The date described |
 
-*School days left* also has `total` (school days in the year), `first_day`,
-`last_day` and `school_year`. Compare `total` with your district's official
+*School days left* and *School days completed* also have `total` (school days
+in the year), `first_day`, `last_day` and `school_year`. Today counts as
+completed once school is out, so completed + left always equals `total`. Compare `total` with your district's official
 count (often 180 days) to sanity-check your calendar file.
 
 ## Installation
@@ -91,7 +93,7 @@ calendar data stays in a plain YAML file you can edit, version and share.
 
 ```yaml
 school_day:
-  - name: Rose Hill Elementary
+  - name: Kirkland Middle School
     schedules:
       regular: { start: "08:50", end: "15:20" }
     school_year: { from: 2026-09-02, to: 2027-06-16 }
@@ -116,7 +118,7 @@ from YAML is removed from Home Assistant.
 ## YAML reference
 
 ```yaml
-name: Rose Hill Elementary   # configuration.yaml only; in the UI the name is set there
+name: Kirkland Middle School   # configuration.yaml only; in the UI the name is set there
 
 # Bell times. "regular" is used on normal school days. Add as many named
 # schedules as you need and refer to them below.
@@ -202,7 +204,7 @@ pip install pyyaml voluptuous
 ```
 
 ```bash
-python3 scripts/check_calendar.py school_day/rose_hill_elementary.yaml
+python3 scripts/check_calendar.py school_day/kirkland_middle_school.yaml
 ```
 
 It prints school days per month and warns about likely mistakes, such as a
@@ -219,7 +221,7 @@ automation:
     triggers:
       - trigger: time
         at:
-          entity_id: sensor.rose_hill_elementary_start_time
+          entity_id: sensor.kirkland_middle_school_start_time
           offset: "-00:40:00"
     actions:
       - action: notify.mobile_app_emmas_phone
@@ -236,7 +238,7 @@ automation:
         at: "06:45:00"
     conditions:
       - condition: state
-        entity_id: binary_sensor.rose_hill_elementary_school_today
+        entity_id: binary_sensor.kirkland_middle_school_school_today
         state: "on"
     actions:
       - action: light.turn_on
@@ -253,13 +255,13 @@ automation:
         at: "19:30:00"
     conditions:
       - condition: state
-        entity_id: binary_sensor.rose_hill_elementary_school_tomorrow
+        entity_id: binary_sensor.kirkland_middle_school_school_tomorrow
         state: "on"
     actions:
       - action: notify.family
         data:
           message: >
-            {% set t = states.binary_sensor.rose_hill_elementary_school_tomorrow.attributes %}
+            {% set t = states.binary_sensor.kirkland_middle_school_school_tomorrow.attributes %}
             🎒 School tomorrow, {{ t.start_time }}-{{ t.end_time }}.
             {% if t.label %}Note: {{ t.label }}.{% endif %}
 ```
@@ -271,15 +273,15 @@ automation:
     triggers:
       - trigger: time
         at:
-          entity_id: sensor.rose_hill_elementary_end_time
+          entity_id: sensor.kirkland_middle_school_end_time
           offset: "-00:20:00"
     actions:
       - action: notify.mobile_app_parent
         data:
-          message: "Pickup at {{ states('sensor.rose_hill_elementary_end_time') | as_timestamp | timestamp_custom('%H:%M') }}"
+          message: "Pickup at {{ states('sensor.kirkland_middle_school_end_time') | as_timestamp | timestamp_custom('%H:%M') }}"
 ```
 
-**Status-based scenes.** `sensor.rose_hill_elementary_status` changes to
+**Status-based scenes.** `sensor.kirkland_middle_school_status` changes to
 `in_school` at the first bell and `after_school` at the last. Use it to set the
 house to "away", or start the robot vacuum while the kids are out.
 

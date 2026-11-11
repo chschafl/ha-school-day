@@ -41,11 +41,21 @@
               "out_of_session": "Außerhalb des Schuljahres"
             }
           },
-          "label": { "name": "Bezeichnung" },
-          "schedule": { "name": "Stundenplan" },
-          "start_time": { "name": "Beginn" },
-          "end_time": { "name": "Ende" },
-          "date": { "name": "Datum" }
+          "label": {
+            "name": "Bezeichnung"
+          },
+          "schedule": {
+            "name": "Stundenplan"
+          },
+          "start_time": {
+            "name": "Beginn"
+          },
+          "end_time": {
+            "name": "Ende"
+          },
+          "date": {
+            "name": "Datum"
+          }
         }
       },
       "school_tomorrow": {
@@ -62,11 +72,21 @@
               "out_of_session": "Außerhalb des Schuljahres"
             }
           },
-          "label": { "name": "Bezeichnung" },
-          "schedule": { "name": "Stundenplan" },
-          "start_time": { "name": "Beginn" },
-          "end_time": { "name": "Ende" },
-          "date": { "name": "Datum" }
+          "label": {
+            "name": "Bezeichnung"
+          },
+          "schedule": {
+            "name": "Stundenplan"
+          },
+          "start_time": {
+            "name": "Beginn"
+          },
+          "end_time": {
+            "name": "Ende"
+          },
+          "date": {
+            "name": "Datum"
+          }
         }
       }
     },
@@ -92,10 +112,35 @@
       "school_days_left": {
         "name": "Verbleibende Schultage",
         "state_attributes": {
-          "total": { "name": "Schultage im Schuljahr" },
-          "school_year": { "name": "Schuljahr" },
-          "first_day": { "name": "Erster Schultag" },
-          "last_day": { "name": "Letzter Schultag" }
+          "total": {
+            "name": "Schultage im Schuljahr"
+          },
+          "school_year": {
+            "name": "Schuljahr"
+          },
+          "first_day": {
+            "name": "Erster Schultag"
+          },
+          "last_day": {
+            "name": "Letzter Schultag"
+          }
+        }
+      },
+      "school_days_completed": {
+        "name": "Absolvierte Schultage",
+        "state_attributes": {
+          "total": {
+            "name": "Schultage im Schuljahr"
+          },
+          "school_year": {
+            "name": "Schuljahr"
+          },
+          "first_day": {
+            "name": "Erster Schultag"
+          },
+          "last_day": {
+            "name": "Letzter Schultag"
+          }
         }
       }
     }

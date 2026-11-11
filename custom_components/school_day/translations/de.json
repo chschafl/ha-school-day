@@ -10,7 +10,7 @@
         },
         "data_description": {
           "name": "Wird als Gerätename angezeigt, z. B. \"Volksschule Am Park\" oder \"Emmas Schule\".",
-          "file": "Pfad relativ zum Konfigurationsordner. Leer lassen für {folder}/<Name der Schule>.yaml."
+          "file": "Pfad im Konfigurationsordner. Leer lassen, um die Datei nach der Schule zu benennen, z. B. school_day/kirkland_middle_school.yaml."
         }
       }
     },

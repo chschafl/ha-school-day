@@ -10,7 +10,7 @@
         },
         "data_description": {
           "name": "Shown as the device name, e.g. \"Kirkland Middle School\" or \"Emma's school\".",
-          "file": "Path relative to your configuration folder. Leave empty to use {folder}/<school name>.yaml."
+          "file": "Path inside your configuration folder. Leave empty to name it after the school, e.g. school_day/kirkland_middle_school.yaml."
         }
       }
     },

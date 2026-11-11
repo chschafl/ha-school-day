@@ -47,7 +47,7 @@ class SchoolDayConfigFlow(ConfigFlow, domain=DOMAIN):
     ) -> ConfigFlowResult:
         """Ask for the school name and calendar file."""
         errors: dict[str, str] = {}
-        placeholders = {"error": "", "folder": DEFAULT_FOLDER}
+        placeholders = {"error": ""}
 
         if user_input is not None:
             name = user_input[CONF_NAME].strip()
